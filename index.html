@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>나를 힘들게 하는 인간 유형 테스트</title>
+
+    <!-- SEO / OG -->
+    <meta
+      name="description"
+      content="최근 당신을 지치게 한 ‘그 사람’을 떠올리며 2~3분만 답해보세요. 내가 예민한 게 아니라 패턴이 있었던 걸지도."
+    />
+    <meta property="og:title" content="나를 힘들게 하는 인간 유형 테스트" />
+    <meta
+      property="og:description"
+      content="이 테스트는 ‘나’가 아니라 ‘그 사람’을 떠올리며 답합니다. 결과로 거리두기/대응 가이드를 드려요."
+    />
+    <meta
+      property="og:image"
+      content="https://dummyimage.com/1200x630/0b1220/ffffff&text=Human"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        font-size: 16px;
+      }
+      body {
+        -webkit-tap-highlight-color: transparent;
+      }
+      .fade {
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+      .fade-out {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      .fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-slate-950 text-slate-100">
+    <main class="max-w-[900px] mx-auto px-5 py-10 sm:py-14">
+      <!-- Header -->
+      <header class="mb-8 sm:mb-10">
+        <div class="flex items-center gap-2 text-sm text-slate-300">
+          <span
+            class="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 border border-slate-800"
+            >🧠 심리 · 관계</span
+          >
+          <span
+            class="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 border border-slate-800"
+            >2~3분</span
+          >
+        </div>
+        <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
+          나를 힘들게 하는 인간 유형 테스트
+        </h1>
+        <p class="mt-3 text-slate-300 leading-relaxed">
+          이 테스트는 <b class="text-slate-100">‘나 자신’</b>을 평가하지
+          않습니다.<br class="hidden sm:block" />
+          최근 당신을 지치게 만든 <b class="text-slate-100">‘특정 한 사람’</b>을
+          떠올리며 답해주세요.
+        </p>
+      </header>
+
+      <!-- Card -->
+      <section
+        class="rounded-3xl bg-slate-900/40 border border-slate-800 shadow-lg overflow-hidden"
+      >
+        <!-- Top bar -->
+        <div class="px-5 sm:px-8 py-5 border-b border-slate-800">
+          <div class="flex items-center justify-between gap-3">
+            <div
+              class="flex items-center gap-2 text-xs sm:text-sm text-slate-300"
+            >
+              <span id="stepText" class="font-semibold text-slate-100"
+                >시작</span
+              >
+              <span class="text-slate-500">•</span>
+              <span id="hintText">빠르게 선택하면 다음으로 넘어갑니다</span>
+            </div>
+            <button
+              id="resetBtn"
+              class="text-xs sm:text-sm px-3 py-1.5 rounded-xl border border-slate-700 hover:border-slate-500 hover:bg-slate-800/60 transition"
+            >
+              다시하기
+            </button>
+          </div>
+
+          <div class="mt-4">
+            <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+              <div
+                id="progressBar"
+                class="h-2 rounded-full bg-slate-200/80"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div
+              class="mt-2 flex items-center justify-between text-xs text-slate-400"
+            >
+              <span id="progressLabel">0 / 12</span>
+              <button
+                id="backBtn"
+                class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-slate-700 hover:border-slate-500 hover:bg-slate-800/60 transition"
+              >
+                ⬅️ 이전
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="px-5 sm:px-8 py-6 sm:py-8">
+          <!-- Intro -->
+          <div id="introView" class="fade fade-in">
+            <div
+              class="rounded-2xl bg-slate-950/40 border border-slate-800 p-5 sm:p-6"
+            >
+              <p class="text-slate-200 leading-relaxed">
+                ⚠️ 안내<br />
+                이 테스트는 ‘나’가 아니라 ‘그 사람’을 떠올리며 진행합니다.<br />
+                상사, 동료, 친구, 연인, 가족 누구든 괜찮아요.
+              </p>
+              <ul class="mt-4 text-sm text-slate-300 space-y-1">
+                <li>• 12문항, 선택은 1초 컷</li>
+                <li>
+                  • 결과는 <b class="text-slate-100">6가지 유형</b> 중 하나
+                </li>
+                <li>
+                  • 마지막에 <b class="text-slate-100">대응 가이드</b>까지 제공
+                </li>
+              </ul>
+              <button
+                id="startBtn"
+                class="mt-6 w-full sm:w-auto px-5 py-3 rounded-2xl bg-white text-slate-950 font-bold hover:opacity-90 active:opacity-80 transition"
+              >
+                시작하기 →
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz -->
+          <div id="quizView" class="hidden fade fade-in">
+            <div class="mb-5">
+              <p class="text-xs sm:text-sm text-slate-400">“그 사람은 보통…”</p>
+              <h2
+                id="questionText"
+                class="mt-2 text-xl sm:text-2xl font-extrabold leading-snug"
+              ></h2>
+            </div>
+
+            <div id="choices" class="grid grid-cols-1 gap-3"></div>
+
+            <div
+              class="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+            >
+              <button
+                id="mobileBackBtn"
+                class="sm:hidden px-4 py-3 rounded-2xl border border-slate-700 hover:border-slate-500 hover:bg-slate-800/60 transition"
+              >
+                ⬅️ 이전
+              </button>
+              <div class="text-xs text-slate-500">
+                팁: 고민 오래 하면 정확도가 떨어져요.
+                <b class="text-slate-200">첫 느낌</b>으로!
+              </div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="resultView" class="hidden fade fade-in">
+            <div class="flex flex-col gap-4">
+              <div
+                class="rounded-2xl bg-slate-950/40 border border-slate-800 p-5 sm:p-6"
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-sm text-slate-300">결과</p>
+                    <h2
+                      id="resultTitle"
+                      class="mt-1 text-2xl sm:text-3xl font-extrabold"
+                    ></h2>
+                    <p
+                      id="resultOneLiner"
+                      class="mt-3 text-slate-200 leading-relaxed"
+                    ></p>
+                  </div>
+                  <div class="text-4xl" id="resultEmoji">🧠</div>
+                </div>
+
+                <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div
+                    class="rounded-2xl border border-slate-800 bg-slate-900/40 p-4"
+                  >
+                    <p class="text-sm font-bold">특징</p>
+                    <ul
+                      id="resultTraits"
+                      class="mt-2 text-sm text-slate-300 space-y-1 list-disc pl-5"
+                    ></ul>
+                  </div>
+                  <div
+                    class="rounded-2xl border border-slate-800 bg-slate-900/40 p-4"
+                  >
+                    <p class="text-sm font-bold">대응 가이드</p>
+                    <ul
+                      id="resultGuide"
+                      class="mt-2 text-sm text-slate-300 space-y-1 list-disc pl-5"
+                    ></ul>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-5 rounded-2xl border border-slate-800 bg-slate-900/40 p-4"
+                >
+                  <p class="text-sm font-bold">공유 문구</p>
+                  <p
+                    id="shareText"
+                    class="mt-2 text-sm text-slate-200 leading-relaxed"
+                  ></p>
+                  <div class="mt-3 flex flex-col sm:flex-row gap-2">
+                    <button
+                      id="copyBtn"
+                      class="px-4 py-3 rounded-2xl bg-white text-slate-950 font-bold hover:opacity-90 active:opacity-80 transition"
+                    >
+                      문구 복사
+                    </button>
+                    <button
+                      id="retestBtn"
+                      class="px-4 py-3 rounded-2xl border border-slate-700 hover:border-slate-500 hover:bg-slate-800/60 transition"
+                    >
+                      다른 사람으로 다시 해보기
+                    </button>
+                  </div>
+                  <p id="copyToast" class="mt-2 text-xs text-slate-400 hidden">
+                    ✅ 복사됨
+                  </p>
+                </div>
+              </div>
+
+              <!-- More tests -->
+              <div
+                class="rounded-2xl border border-slate-800 bg-slate-900/30 p-5 sm:p-6"
+              >
+                <p class="text-sm text-slate-300">
+                  🧠 이 테스트가 맞았다면, 이것도 잘 맞습니다
+                </p>
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <a
+                    class="rounded-2xl border border-slate-800 bg-slate-950/30 p-4 hover:bg-slate-950/50 transition"
+                    href="https://mental.funnyfunny.cloud/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="font-bold">🧠 하루 정신 체력 지수</div>
+                    <div class="mt-1 text-xs text-slate-400">
+                      오늘 집중/멘탈 상태 점검
+                    </div>
+                  </a>
+                  <a
+                    class="rounded-2xl border border-slate-800 bg-slate-950/30 p-4 hover:bg-slate-950/50 transition"
+                    href="https://energy.funnyfunny.cloud/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="font-bold">⚡ 인생 에너지 누수</div>
+                    <div class="mt-1 text-xs text-slate-400">
+                      에너지가 새는 지점 찾기
+                    </div>
+                  </a>
+                  <a
+                    class="rounded-2xl border border-slate-800 bg-slate-950/30 p-4 hover:bg-slate-950/50 transition"
+                    href="https://life.funnyfunny.cloud/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="font-bold">⏰ 인생 남은 시간 대시보드</div>
+                    <div class="mt-1 text-xs text-slate-400">
+                      밈 버전으로 보는 나의 진짜 자유시간 &amp; "어디서 새고
+                      있는지" 리포트
+                    </div>
+                  </a>
+                </div>
+                <p class="mt-3 text-xs text-slate-500">
+                  ※ funnyfunny의 실제 서비스로 바로 이동합니다.
+                </p>
+              </div>
+
+              <div class="text-center text-xs text-slate-500">
+                ⚠️ 이 결과는 관계를 “판결”하기 위한 것이 아니라,
+                <b class="text-slate-300">내 에너지 보호</b>를 위한 참고입니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="mt-10 text-center text-xs text-slate-600">
+        made for funnyfunny · 결과 페이지에 광고/내부링크를 집중시키면
+        수익/체류가 같이 올라갑니다
+      </footer>
+    </main>
+
+    <script>
+      // -----------------------------
+      // Data
+      // -----------------------------
+      const TYPES = {
+        vamp: {
+          key: "vamp",
+          emoji: "🧛",
+          title: "감정 흡혈귀형",
+          oneLiner:
+            "당신이 예민해진 게 아닙니다. 이 사람은 감정을 소비시키는 구조일 수 있어요.",
+          traits: [
+            "감정 기복이 크거나 드라마틱한 표현이 잦음",
+            "공감은 요구하지만 배려는 부족하게 느껴짐",
+            "대화 후 내가 지치고 무기력해지는 경우가 많음",
+          ],
+          guide: [
+            "깊은 감정 대화 빈도 줄이기",
+            "공감 ‘전부’ 대신 사실 중심으로 짧게 반응",
+            "거리가 필요하면 죄책감 없이 확보하기",
+          ],
+          share:
+            "나를 힘들게 하는 인간 유형 테스트 해봤는데 소름… 내가 예민한 게 아니었네.",
+        },
+        praise: {
+          key: "praise",
+          emoji: "🪞",
+          title: "인정 중독형",
+          oneLiner:
+            "이 사람은 ‘인정’을 연료로 움직입니다. 문제는 그 연료를 늘 당신에게서 가져간다는 점.",
+          traits: [
+            "칭찬/존중 신호에 과하게 민감",
+            "무시당했다고 느끼면 서운함/공격성 증가",
+            "관계가 ‘평가’ 중심으로 흐르기 쉬움",
+          ],
+          guide: [
+            "칭찬은 하되 ‘기준’을 정해 과다 제공 금지",
+            "감정이 아닌 ‘행동/사실’ 기준으로 피드백",
+            "상대 기분 관리까지 책임지지 않기",
+          ],
+          share: "이 테스트 ‘특정 인물 떠올리면서’ 하니까 결과가 너무 정확함…",
+        },
+        blame: {
+          key: "blame",
+          emoji: "🧨",
+          title: "책임 전가형",
+          oneLiner:
+            "관계가 힘든 이유는 당신이 부족해서가 아니라, 책임이 항상 한쪽으로 흐르기 때문입니다.",
+          traits: [
+            "문제 상황에서 환경/타인 탓이 잦음",
+            "사과에 조건이 붙거나 핵심을 비껴감",
+            "역할/약속이 흐려지는 패턴이 반복됨",
+          ],
+          guide: [
+            "대화는 기록/정의(역할·기한·기준)로 고정",
+            "‘감정 설득’ 대신 ‘합의/합의서’ 방식으로",
+            "반복되면 관계의 기대치를 낮추기",
+          ],
+          share:
+            "나는 그냥 예민한 줄 알았는데… 패턴이 있었네. (테스트 해보면 앎)",
+        },
+        hole: {
+          key: "hole",
+          emoji: "🕳️",
+          title: "에너지 블랙홀형",
+          oneLiner:
+            "설명할 수는 없지만 함께 있으면 힘든 사람. 그 감각은 틀리지 않았습니다.",
+          traits: [
+            "명확한 사건이 없어도 만남 후 피곤함",
+            "대화가 길어질수록 나만 소모되는 느낌",
+            "균형이 깨진 채 ‘내가 더 많이’ 맞춰줌",
+          ],
+          guide: [
+            "만남/대화 시간에 ‘상한선’ 두기",
+            "도와줄 수 있는 범위를 미리 정해두기",
+            "혼자 회복 루틴(산책/샤워/정리) 고정하기",
+          ],
+          share: "테스트 결과가 ‘에너지 블랙홀형’… 그래서 늘 피곤했던 거구나.",
+        },
+        dual: {
+          key: "dual",
+          emoji: "🎭",
+          title: "이중 플레이어형",
+          oneLiner:
+            "이 사람은 사람보다 상황에 충성합니다. 그래서 당신은 항상 헷갈리게 됩니다.",
+          traits: [
+            "말과 행동의 일관성이 떨어짐",
+            "상황/사람에 따라 태도가 달라짐",
+            "갈등에서는 회피하거나 분위기를 흐리기 쉬움",
+          ],
+          guide: [
+            "기대치를 낮추고 ‘검증된 행동’만 믿기",
+            "중요한 일은 메시지/문서로 남기기",
+            "그 사람의 ‘말’에 내 감정을 담보 잡히지 않기",
+          ],
+          share:
+            "이거 해봐. ‘그 사람’ 떠올리면서 했더니 너무 정확해서 좀 무섭다…",
+        },
+        distance: {
+          key: "distance",
+          emoji: "🧊",
+          title: "거리 관리 필요형",
+          oneLiner:
+            "누가 잘못이라기보다, 성향이 맞지 않아 거리가 필요한 관계일 수 있어요.",
+          traits: [
+            "악의는 없어도 맞추는 비용이 큼",
+            "대화 방식/우선순위가 자주 어긋남",
+            "가까울수록 스트레스가 커짐",
+          ],
+          guide: [
+            "친밀도(거리)를 조절해서 유지하는 방식 추천",
+            "연락/만남 빈도를 ‘내 회복’ 기준으로",
+            "무리한 이해·설득보다 경계선을 선택하기",
+          ],
+          share:
+            "나를 힘들게 하는 인간 유형 테스트… 결과 보고 나서 거리 조절이 답이란 걸 깨달음.",
+        },
+      };
+
+      const questions = [
+        {
+          q: "문제가 생기면?",
+          choices: [
+            { text: "자기 입장부터 설명한다", w: { praise: 1, dual: 1 } },
+            { text: "상황이나 타인을 탓한다", w: { blame: 3, dual: 1 } },
+          ],
+        },
+        {
+          q: "칭찬이나 인정에 대해",
+          choices: [
+            { text: "은근히 자주 필요해 보인다", w: { praise: 3 } },
+            { text: "크게 신경 쓰지 않는 편이다", w: { distance: 1 } },
+          ],
+        },
+        {
+          q: "대화 후 내 기분은 보통",
+          choices: [
+            { text: "괜히 지치고 무기력해진다", w: { hole: 3, vamp: 2 } },
+            { text: "그냥 평범하다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "감정 표현을",
+          choices: [
+            { text: "과하게 자주 한다", w: { vamp: 3, praise: 1 } },
+            { text: "필요할 때만 한다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "문제가 생겼을 때",
+          choices: [
+            { text: "책임을 나누려 한다", w: { distance: 2 } },
+            { text: "책임을 피하려 한다", w: { blame: 3, dual: 1 } },
+          ],
+        },
+        {
+          q: "얘기하면",
+          choices: [
+            {
+              text: "이야기가 자주 그 사람 중심으로 흐른다",
+              w: { praise: 2, hole: 2 },
+            },
+            { text: "비교적 균형이 맞는다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "약속이나 역할에 대해",
+          choices: [
+            { text: "말은 잘하지만 흐려지는 편", w: { dual: 3, blame: 1 } },
+            { text: "비교적 지킨다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "사과는",
+          choices: [
+            {
+              text: '조건이 붙는다 ("그땐 그럴 수밖에…")',
+              w: { blame: 2, dual: 2 },
+            },
+            { text: "비교적 명확하다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "내가 힘들다고 말했을 때",
+          choices: [
+            { text: "본인 얘기로 넘어간다", w: { hole: 2, praise: 2 } },
+            { text: "잠시라도 들어준다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "갈등 상황에서",
+          choices: [
+            { text: "회피하거나 분위기를 흐린다", w: { dual: 3, vamp: 1 } },
+            { text: "정면으로 마주하려 한다", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "관계에서 에너지는",
+          choices: [
+            { text: "내가 더 많이 쓰는 느낌", w: { hole: 3, vamp: 1 } },
+            { text: "비슷하게 쓰는 느낌", w: { distance: 2 } },
+          ],
+        },
+        {
+          q: "거리를 두면",
+          choices: [
+            {
+              text: "오히려 마음이 편해진다",
+              w: { hole: 2, vamp: 1, blame: 1, dual: 1 },
+            },
+            { text: "크게 달라지지 않는다", w: { distance: 2 } },
+          ],
+        },
+      ];
+
+      // -----------------------------
+      // State
+      // -----------------------------
+      let idx = -1; // -1 intro, 0..11 questions
+      let answers = []; // store chosen index
+      let scores = {
+        vamp: 0,
+        praise: 0,
+        blame: 0,
+        hole: 0,
+        dual: 0,
+        distance: 0,
+      };
+
+      // -----------------------------
+      // Elements
+      // -----------------------------
+      const introView = document.getElementById("introView");
+      const quizView = document.getElementById("quizView");
+      const resultView = document.getElementById("resultView");
+
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const backBtn = document.getElementById("backBtn");
+      const mobileBackBtn = document.getElementById("mobileBackBtn");
+
+      const questionText = document.getElementById("questionText");
+      const choicesEl = document.getElementById("choices");
+
+      const stepText = document.getElementById("stepText");
+      const progressBar = document.getElementById("progressBar");
+      const progressLabel = document.getElementById("progressLabel");
+
+      const resultTitle = document.getElementById("resultTitle");
+      const resultEmoji = document.getElementById("resultEmoji");
+      const resultOneLiner = document.getElementById("resultOneLiner");
+      const resultTraits = document.getElementById("resultTraits");
+      const resultGuide = document.getElementById("resultGuide");
+      const shareText = document.getElementById("shareText");
+      const copyBtn = document.getElementById("copyBtn");
+      const copyToast = document.getElementById("copyToast");
+      const retestBtn = document.getElementById("retestBtn");
+
+      // -----------------------------
+      // Helpers
+      // -----------------------------
+      function resetAll() {
+        idx = -1;
+        answers = [];
+        scores = {
+          vamp: 0,
+          praise: 0,
+          blame: 0,
+          hole: 0,
+          dual: 0,
+          distance: 0,
+        };
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function applyWeights(choiceWeights, dir = +1) {
+        for (const [k, v] of Object.entries(choiceWeights || {})) {
+          scores[k] = (scores[k] || 0) + v * dir;
+        }
+      }
+
+      function setView(which) {
+        introView.classList.add("hidden");
+        quizView.classList.add("hidden");
+        resultView.classList.add("hidden");
+        which.classList.remove("hidden");
+      }
+
+      function updateProgress() {
+        const total = questions.length;
+        const done = Math.max(0, idx);
+        const current = Math.min(total, done);
+        progressLabel.textContent = `${current} / ${total}`;
+        const pct = total === 0 ? 0 : (current / total) * 100;
+        progressBar.style.width = `${pct}%`;
+
+        if (idx < 0) stepText.textContent = "시작";
+        else if (idx < total) stepText.textContent = `질문 ${idx + 1}`;
+        else stepText.textContent = "결과";
+      }
+
+      function renderQuestion() {
+        const q = questions[idx];
+        questionText.textContent = q.q;
+
+        choicesEl.innerHTML = "";
+        q.choices.forEach((c, ci) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className =
+            "w-full text-left px-5 py-4 rounded-2xl border border-slate-800 bg-slate-950/30 hover:bg-slate-950/55 hover:border-slate-600 transition " +
+            "active:scale-[0.99]";
+          btn.innerHTML = `
+          <div class="flex items-center justify-between gap-4">
+            <div class="text-base sm:text-lg font-semibold">${c.text}</div>
+            <div class="text-slate-500">→</div>
+          </div>
+        `;
+          btn.addEventListener("click", () => choose(ci));
+          choicesEl.appendChild(btn);
+        });
+      }
+
+      function choose(choiceIndex) {
+        // if previously answered this question, remove old weights
+        if (answers[idx] !== undefined) {
+          const old = questions[idx].choices[answers[idx]];
+          applyWeights(old.w, -1);
+        }
+
+        // apply new
+        answers[idx] = choiceIndex;
+        const now = questions[idx].choices[choiceIndex];
+        applyWeights(now.w, +1);
+
+        // move next immediately
+        idx += 1;
+        render();
+      }
+
+      function goBack() {
+        if (idx <= 0) {
+          idx = -1;
+          render();
+          return;
+        }
+        // remove weights of previous answered question (idx-1), because we're stepping back to it
+        const prevIndex = idx - 1;
+        const chosen = answers[prevIndex];
+        if (chosen !== undefined) {
+          applyWeights(questions[prevIndex].choices[chosen].w, -1);
+          // keep answer but we’ll re-apply when re-choosing; to allow “back without change”, we re-apply after render
+        }
+        idx = prevIndex;
+        render(true);
+      }
+
+      function computeResultKey() {
+        // tie-break priority: blame/dual/vamp/hole/praise/distance (spicier first)
+        const order = ["blame", "dual", "vamp", "hole", "praise", "distance"];
+        let bestKey = order[0];
+        let bestScore = -Infinity;
+
+        // find max
+        for (const k of Object.keys(scores)) {
+          if (scores[k] > bestScore) {
+            bestScore = scores[k];
+            bestKey = k;
+          } else if (scores[k] === bestScore) {
+            // tie-break by order
+            const a = order.indexOf(k);
+            const b = order.indexOf(bestKey);
+            if (a !== -1 && b !== -1 && a < b) bestKey = k;
+          }
+        }
+
+        // if everything is too low / neutral, default to distance
+        const sum = Object.values(scores).reduce((a, b) => a + b, 0);
+        if (sum <= 4) return "distance";
+
+        return bestKey;
+      }
+
+      function renderResult() {
+        const key = computeResultKey();
+        const type = TYPES[key];
+
+        resultTitle.textContent = type.title;
+        resultEmoji.textContent = type.emoji;
+        resultOneLiner.textContent = type.oneLiner;
+
+        resultTraits.innerHTML = "";
+        type.traits.forEach((t) => {
+          const li = document.createElement("li");
+          li.textContent = t;
+          resultTraits.appendChild(li);
+        });
+
+        resultGuide.innerHTML = "";
+        type.guide.forEach((g) => {
+          const li = document.createElement("li");
+          li.textContent = g;
+          resultGuide.appendChild(li);
+        });
+
+        shareText.textContent = type.share;
+        copyToast.classList.add("hidden");
+      }
+
+      function render(reapplyOnBack = false) {
+        updateProgress();
+
+        // back button visibility
+        const showBack = idx >= 0 && idx < questions.length;
+        backBtn.classList.toggle("hidden", !showBack);
+        mobileBackBtn.classList.toggle("hidden", !showBack);
+
+        if (idx < 0) {
+          setView(introView);
+          progressBar.style.width = "0%";
+          progressLabel.textContent = `0 / ${questions.length}`;
+          return;
+        }
+
+        if (idx >= 0 && idx < questions.length) {
+          setView(quizView);
+          renderQuestion();
+
+          // if we came here by "back", and the question already had an answer,
+          // we removed its weights in goBack(), so we re-apply it to keep current score state stable
+          if (reapplyOnBack) {
+            const chosen = answers[idx];
+            if (chosen !== undefined) {
+              applyWeights(questions[idx].choices[chosen].w, +1);
+            }
+          }
+          return;
+        }
+
+        // finished
+        setView(resultView);
+        progressBar.style.width = "100%";
+        progressLabel.textContent = `${questions.length} / ${questions.length}`;
+        renderResult();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      async function copyShare() {
+        const text = shareText.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(text);
+          copyToast.classList.remove("hidden");
+          setTimeout(() => copyToast.classList.add("hidden"), 1200);
+        } catch (e) {
+          // fallback
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          copyToast.classList.remove("hidden");
+          setTimeout(() => copyToast.classList.add("hidden"), 1200);
+        }
+      }
+
+      // -----------------------------
+      // Events
+      // -----------------------------
+      startBtn.addEventListener("click", () => {
+        idx = 0;
+        render();
+      });
+
+      resetBtn.addEventListener("click", resetAll);
+      backBtn.addEventListener("click", goBack);
+      mobileBackBtn.addEventListener("click", goBack);
+
+      copyBtn.addEventListener("click", copyShare);
+      retestBtn.addEventListener("click", resetAll);
+
+      // init
+      render();
+    </script>
+  </body>
+</html>
